@@ -1,0 +1,20 @@
+<script>
+  let options = {
+    rock: "scissors",
+    scissors: "paper",
+    paper: "rock",
+  };
+
+  let computerPlay = () => {
+    return Math.floor(Math.random() * 3);
+  };
+
+  console.log(computerPlay());
+  let gamePlay = (p1, p2) => {
+    if (p1 == p2) {
+      return "It's a draw!";
+    } else return "Player " + (options[p1] == p2 ? 1 : 2) + " has won!";
+  };
+
+  console.log(gamePlay("scissors", "scissors"));
+</script>
