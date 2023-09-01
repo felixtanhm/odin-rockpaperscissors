@@ -5,10 +5,17 @@
     paper: "rock",
   };
 
+  let playerScore = 0;
+  let comScore = 0;
+
   let gamePlay = (p1, p2) => {
     if (p1 == p2) {
       return "It's a draw!";
-    } else return "Player " + (options[p1] == p2 ? 1 : 2) + " has won!";
+    } else {
+      let winner = options[p1] == p2 ? "Player" : "Computer";
+      winner == "Player" ? playerScore++ : comScore++;
+      return `${winner} has won!`;
+    }
   };
 
   let computerPlay = () => {
@@ -18,4 +25,5 @@
 
   let playerPlay = prompt("What's your choice?").toLowerCase();
   alert(gamePlay(playerPlay, computerPlay()));
+  alert(`Player Score ${playerScore} | Computer Score ${comScore}`);
 </script>
