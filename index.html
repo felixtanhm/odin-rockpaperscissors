@@ -12,9 +12,12 @@
   };
 
   let computerPlay = () => {
-    return Math.floor(Math.random() * 3);
+    let int = Math.floor(Math.random() * 3);
+    return Object.keys(options)[int];
   };
 
+  console.log(computerPlay());
+
   let playerPlay = prompt("What's your choice?").toLowerCase();
-  console.log(gamePlay(playerPlay, "scissors"));
+  console.log(gamePlay(playerPlay, computerPlay()));
 </script>
