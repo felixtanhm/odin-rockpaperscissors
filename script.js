@@ -11,14 +11,12 @@ let comScore = 0;
 let gameRounds = 3;
 
 document.querySelectorAll("button").forEach((button) => {
-  button.addEventListener("click", () => {
-    console.log(button.textContent);
-  });
+  button.addEventListener(
+    "click",
+    gamePlay(button.textContent.toLowerCase(), computerPlay())
+  );
 });
 
-// When button is clicked
-// Execute computerPlay to generate computer choice
-// Get player's choice
 // Determine who wins
 // Update DOM to reflect new score
 // Update rounds to reflect that a round has been played
@@ -30,12 +28,8 @@ let computerPlay = () => {
   return optionsArr[int];
 };
 
-let playerPlay = () => {
-  return prompt("What's your choice?").toLowerCase();
-};
-
 //Evaluate gameplay
-let gamePlay = (p1, p2) => {
+const gamePlay = (p1, p2) => {
   if (p1 == p2) {
     return "It's a draw!";
   } else {
