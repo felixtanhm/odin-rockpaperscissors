@@ -10,6 +10,20 @@ let playerScore = 0;
 let comScore = 0;
 let gameRounds = 3;
 
+document.querySelectorAll("button").forEach((button) => {
+  button.addEventListener("click", () => {
+    console.log(button.textContent);
+  });
+});
+
+// When button is clicked
+// Execute computerPlay to generate computer choice
+// Get player's choice
+// Determine who wins
+// Update DOM to reflect new score
+// Update rounds to reflect that a round has been played
+// When rounds reach 0, declare winner or draw
+
 //Define player choices
 let computerPlay = () => {
   let int = Math.floor(Math.random() * 3);
