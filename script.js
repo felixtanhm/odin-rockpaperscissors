@@ -4,6 +4,7 @@ let options = {
   scissors: "paper",
   paper: "rock",
 };
+let optionsArr = Object.keys(options);
 
 let playerScore = 0;
 let comScore = 0;
@@ -12,7 +13,7 @@ let gameRounds = 3;
 //Define player choices
 let computerPlay = () => {
   let int = Math.floor(Math.random() * 3);
-  return Object.keys(options)[int];
+  return optionsArr[int];
 };
 
 let playerPlay = () => {
