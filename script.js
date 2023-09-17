@@ -10,12 +10,24 @@ let playerScore = 0;
 let comScore = 0;
 let gameRounds = 3;
 
-// Determine who wins
-// Update DOM to reflect new score
-// Update rounds to reflect that a round has been played
-// When rounds reach 0, declare winner or draw
+//Generate Elements
+let playerScoreDisplay = document
+  .querySelector("#score-container")
+  .appendChild(document.createElement("h3"));
+let comScoreDisplay = document
+  .querySelector("#score-container")
+  .appendChild(document.createElement("h3"));
+let resultAnnouncement = document
+  .querySelector("#choice-selection")
+  .appendChild(document.createElement("h3"));
+let winnerAnnouncement = document
+  .querySelector("#choice-selection")
+  .appendChild(document.createElement("h3"));
 
-//Define player choices
+playerScoreDisplay.innerText = `Player: ${playerScore}`;
+comScoreDisplay.innerText = `Computer: ${comScore}`;
+
+//Generate computer choice
 const computerPlay = () => {
   let int = Math.floor(Math.random() * 3);
   return optionsArr[int];
@@ -23,24 +35,39 @@ const computerPlay = () => {
 
 //Evaluate gameplay
 const gamePlay = (p1, p2) => {
+  gameRounds--;
   if (p1 == p2) {
-    console.log("It's a draw!");
+    resultAnnouncement.innerText = "It's a draw!";
   } else {
-    let winner = options[p1] == p2 ? "Player" : "Computer";
-    winner == "Player" ? playerScore++ : comScore++;
-    return console.log(`${winner} has won!`);
+    let winner;
+    if (options[p1] == p2) {
+      playerScore++;
+      playerScoreDisplay.innerText = `Player: ${playerScore}`;
+      winner = "Player";
+    } else {
+      comScore++;
+      comScoreDisplay.innerText = `Computer: ${comScore}`;
+      winner = "Computer";
+    }
+    resultAnnouncement.innerText = `${winner} has won!`;
+  }
+};
+
+const evaluateWinner = () => {
+  if (playerScore == comScore) {
+    winnerAnnouncement.innerText = `Game is over! It's a draw! Refresh the page to play again.`;
+  } else {
+    playerScore > comScore
+      ? (winnerAnnouncement.innerText = `Game is over! Player has won! Refresh the page to play again.`)
+      : (winnerAnnouncement.innerText = `Game is over! Computer has won! Refresh the page to play again.`);
   }
 };
 
 const handleClick = (e) => {
-  gamePlay(e.target.textContent.toLowerCase(), computerPlay());
+  if (gameRounds > 0)
+    gamePlay(e.target.textContent.toLowerCase(), computerPlay());
+  if (gameRounds == 0) evaluateWinner();
 };
-
-// //Execute gameplay
-// for (let round = 0; round < gameRounds; round++) {
-//   alert(gamePlay(playerPlay(), computerPlay()));
-//   alert(`Player Score ${playerScore} | Computer Score ${comScore}`);
-// }
 
 document.querySelectorAll("button").forEach((button) => {
   button.addEventListener("click", handleClick);
