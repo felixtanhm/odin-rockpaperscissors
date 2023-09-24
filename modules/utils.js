@@ -1,4 +1,11 @@
-const initGamePlay = () => {
+const initGamePlay = (optionsArr) => {
+  optionsArr.forEach((option) => {
+    let button = document
+      .querySelector("#choice-selection")
+      .appendChild(document.createElement("button"));
+    button.textContent = option.charAt(0).toUpperCase() + option.slice(1);
+  });
+
   let playerScoreDisplay = document
     .querySelector("#score-container")
     .appendChild(document.createElement("h3"));

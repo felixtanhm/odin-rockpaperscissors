@@ -4,10 +4,11 @@ import { initGamePlay, computerPlay, evaluateWinner } from "./modules/utils.js";
 //Define variables
 let options = {
   rock: "scissors",
-  scissors: "paper",
   paper: "rock",
+  scissors: "paper",
 };
 let optionsArr = Object.keys(options);
+console.log(optionsArr);
 
 let playerScore = 0;
 let comScore = 0;
@@ -17,7 +18,7 @@ let [
   comScoreDisplay,
   resultAnnouncement,
   winnerAnnouncement,
-] = initGamePlay();
+] = initGamePlay(optionsArr);
 
 //Evaluate gameplay
 const gamePlay = (p1, p2) => {
