@@ -1,3 +1,6 @@
+import { reverseMode } from "./modules/reverseMode.js";
+import { initGamePlay, computerPlay, evaluateWinner } from "./modules/utils.js";
+
 //Define variables
 let options = {
   rock: "scissors",
@@ -9,29 +12,12 @@ let optionsArr = Object.keys(options);
 let playerScore = 0;
 let comScore = 0;
 let gameRounds = 3;
-
-//Generate Elements
-let playerScoreDisplay = document
-  .querySelector("#score-container")
-  .appendChild(document.createElement("h3"));
-let comScoreDisplay = document
-  .querySelector("#score-container")
-  .appendChild(document.createElement("h3"));
-let resultAnnouncement = document
-  .querySelector("#choice-selection")
-  .appendChild(document.createElement("h3"));
-let winnerAnnouncement = document
-  .querySelector("#choice-selection")
-  .appendChild(document.createElement("h3"));
-
-playerScoreDisplay.innerText = `Player: ${playerScore}`;
-comScoreDisplay.innerText = `Computer: ${comScore}`;
-
-//Generate computer choice
-const computerPlay = () => {
-  let int = Math.floor(Math.random() * 3);
-  return optionsArr[int];
-};
+let [
+  playerScoreDisplay,
+  comScoreDisplay,
+  resultAnnouncement,
+  winnerAnnouncement,
+] = initGamePlay();
 
 //Evaluate gameplay
 const gamePlay = (p1, p2) => {
@@ -53,22 +39,15 @@ const gamePlay = (p1, p2) => {
   }
 };
 
-const evaluateWinner = () => {
-  if (playerScore == comScore) {
-    winnerAnnouncement.innerText = `Game is over! It's a draw! Refresh the page to play again.`;
-  } else {
-    playerScore > comScore
-      ? (winnerAnnouncement.innerText = `Game is over! Player has won! Refresh the page to play again.`)
-      : (winnerAnnouncement.innerText = `Game is over! Computer has won! Refresh the page to play again.`);
-  }
-};
-
 const handleClick = (e) => {
   if (gameRounds > 0)
-    gamePlay(e.target.textContent.toLowerCase(), computerPlay());
-  if (gameRounds == 0) evaluateWinner();
+    gamePlay(e.target.textContent.toLowerCase(), computerPlay(optionsArr));
+  if (gameRounds == 0)
+    evaluateWinner(playerScore, comScore, winnerAnnouncement);
 };
 
 document.querySelectorAll("button").forEach((button) => {
   button.addEventListener("click", handleClick);
 });
+
+console.log(reverseMode());
