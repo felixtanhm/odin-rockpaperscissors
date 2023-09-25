@@ -1,5 +1,10 @@
 import { reverseMode } from "./modules/reverseMode.js";
 import { initGamePlay, computerPlay, evaluateWinner } from "./modules/utils.js";
+import {
+  loadModeSelection,
+  loadGameMode,
+  gameMode,
+} from "./modules/gameMode.js";
 
 //Define variables
 let options = {
@@ -40,7 +45,7 @@ const gamePlay = (p1, p2) => {
   }
 };
 
-const handleClick = (e) => {
+const handleOptionClick = (e) => {
   if (gameRounds > 0)
     gamePlay(e.target.textContent.toLowerCase(), computerPlay(optionsArr));
   if (gameRounds == 0)
@@ -48,7 +53,13 @@ const handleClick = (e) => {
 };
 
 document.querySelectorAll("button").forEach((button) => {
-  button.addEventListener("click", handleClick);
+  button.addEventListener("click", handleOptionClick);
 });
 
 console.log(reverseMode());
+
+const loadPages = () => {
+  gameMode ? loadGameMode(gameMode) : loadModeSelection();
+};
+
+loadPages();

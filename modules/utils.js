@@ -1,3 +1,5 @@
+const gameModeSelect = () => {};
+
 const initGamePlay = (optionsArr) => {
   optionsArr.forEach((option) => {
     let button = document
@@ -13,10 +15,10 @@ const initGamePlay = (optionsArr) => {
     .querySelector("#score-container")
     .appendChild(document.createElement("h3"));
   let resultAnnouncement = document
-    .querySelector("#choice-selection")
+    .querySelector("#result-container")
     .appendChild(document.createElement("h3"));
   let winnerAnnouncement = document
-    .querySelector("#choice-selection")
+    .querySelector("#result-container")
     .appendChild(document.createElement("h3"));
 
   playerScoreDisplay.innerText = `Player: 0`;
