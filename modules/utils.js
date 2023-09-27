@@ -14,3 +14,23 @@ const evaluateWinner = (playerScore, comScore, winnerAnnouncement) => {
 };
 
 export { computerPlay, evaluateWinner };
+
+const playReverseMode = (playerChoice, comChoice) => {
+  if (playerChoice == comChoice) {
+    resultAnnouncement.innerText = "It's a draw!";
+  } else {
+    let winner;
+    if (options[playerChoice] == comChoice) {
+      playerScore++;
+      playerScoreDisplay.innerText = `Player: ${playerScore}`;
+      winner = "Player";
+    } else {
+      comScore++;
+      comScoreDisplay.innerText = `Computer: ${comScore}`;
+      winner = "Computer";
+    }
+    resultAnnouncement.innerText = `${winner} has won!`;
+  }
+};
+
+export { playReverseMode };

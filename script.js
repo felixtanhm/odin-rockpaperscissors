@@ -1,4 +1,5 @@
 import { computerPlay, evaluateWinner } from "./modules/utils.js";
+import { playReverseMode, playNormalMode } from "./modules/gamePlay.js";
 
 let gameMode;
 let options = {
@@ -22,8 +23,16 @@ const handleModeClick = (e) => {
 // Gameplay Option click handler
 const handleOptionClick = (e) => {
   if (gameRounds > 0) {
-    gamePlay(e.target.textContent.toLowerCase(), computerPlay(optionsArr));
     gameRounds--;
+    gameMode == "normal"
+      ? playReverseMode(
+          e.target.textContent.toLowerCase(),
+          computerPlay(optionsArr)
+        )
+      : playNormalMode(
+          e.target.textContent.toLowerCase(),
+          computerPlay(optionsArr)
+        );
   }
   if (gameRounds == 0)
     evaluateWinner(playerScore, comScore, winnerAnnouncement);
