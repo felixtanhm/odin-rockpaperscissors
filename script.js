@@ -1,115 +1,66 @@
-import { computerPlay } from "./modules/utils.js";
-import {
-  playReverseMode,
-  playNormalMode,
-  evaluateWinner,
-} from "./modules/gamePlay.js";
+import { loadModeSelection } from "./modules/utils.js";
 
-let gameMode;
-let gameRounds = 3;
-let options = {
-  rock: "scissors",
-  paper: "rock",
-  scissors: "paper",
-};
-let optionsArr = Object.keys(options);
+// const loadModeSelection = () => {
+//   // Generate helper text for Game Mode selection
+//   let title = document
+//     .querySelector("#mode-selection")
+//     .appendChild(document.createElement("h3"));
+//   title.innerText = 'Select a mode of "Scissors Paper Stone" to play!';
 
-let playerScoreDisplay, comScoreDisplay, resultAnnouncement, winnerAnnouncement;
+//   // Generate buttons to select Game Modes
+//   let normalBtn = document
+//     .querySelector("#mode-selection")
+//     .appendChild(document.createElement("button"));
+//   normalBtn.innerText = "Normal";
+//   let reverseBtn = document
+//     .querySelector("#mode-selection")
+//     .appendChild(document.createElement("button"));
+//   reverseBtn.innerText = "Reverse";
 
-// Mode Selection click handler
-const handleModeClick = (e) => {
-  gameMode = e.target.textContent.toLowerCase();
-  loadGameMode(gameMode);
-};
+//   document.querySelectorAll("#mode-selection > button").forEach((button) => {
+//     button.addEventListener("click", handleModeClick);
+//   });
+// };
 
-// Gameplay Option click handler
-const handleOptionClick = (e) => {
-  console.log("button clicked");
-  if (gameRounds > 0) {
-    gameMode == "normal"
-      ? playNormalMode(
-          e.target.textContent.toLowerCase(),
-          computerPlay(optionsArr),
-          options
-        )
-      : playReverseMode(
-          e.target.textContent.toLowerCase(),
-          computerPlay(optionsArr),
-          options
-        );
-    gameRounds--;
-  }
-  if (gameRounds == 0) {
-    evaluateWinner();
-  }
-};
+// const loadGameMode = (mode) => {
+//   // Set the Game Mode state
+//   gameMode = mode;
 
-const loadModeSelection = () => {
-  // Generate helper text for Game Mode selection
-  let title = document
-    .querySelector("#mode-selection")
-    .appendChild(document.createElement("h3"));
-  title.innerText = 'Select a mode of "Scissors Paper Stone" to play!';
+//   // Create buttons for each of the options
+//   optionsArr.forEach((option) => {
+//     let button = document
+//       .querySelector("#gameplay-selection")
+//       .appendChild(document.createElement("button"));
+//     button.textContent = option.charAt(0).toUpperCase() + option.slice(1);
+//   });
 
-  // Generate buttons to select Game Modes
-  let normalBtn = document
-    .querySelector("#mode-selection")
-    .appendChild(document.createElement("button"));
-  normalBtn.innerText = "Normal";
-  let reverseBtn = document
-    .querySelector("#mode-selection")
-    .appendChild(document.createElement("button"));
-  reverseBtn.innerText = "Reverse";
+//   // Create helper text to display information on the state of gameplay
+//   let title = document
+//     .querySelector("#score-container")
+//     .appendChild(document.createElement("h2"));
+//   title.innerText = "Score";
+//   playerScoreDisplay = document
+//     .querySelector("#score-container")
+//     .appendChild(document.createElement("h3"));
+//   comScoreDisplay = document
+//     .querySelector("#score-container")
+//     .appendChild(document.createElement("h3"));
+//   resultAnnouncement = document
+//     .querySelector("#result-container")
+//     .appendChild(document.createElement("h3"));
+//   winnerAnnouncement = document
+//     .querySelector("#result-container")
+//     .appendChild(document.createElement("h3"));
 
-  document.querySelectorAll("#mode-selection > button").forEach((button) => {
-    button.addEventListener("click", handleModeClick);
-  });
-};
+//   playerScoreDisplay.innerText = `Player: 0`;
+//   comScoreDisplay.innerText = `Computer: 0`;
 
-const loadGameMode = (mode) => {
-  // Set the Game Mode state
-  gameMode = mode;
+//   // Attach click handlers to each of the option buttons
+//   document
+//     .querySelectorAll("#gameplay-selection > button")
+//     .forEach((button) => {
+//       button.addEventListener("click", handleOptionClick);
+//     });
+// };
 
-  // Create buttons for each of the options
-  optionsArr.forEach((option) => {
-    let button = document
-      .querySelector("#gameplay-selection")
-      .appendChild(document.createElement("button"));
-    button.textContent = option.charAt(0).toUpperCase() + option.slice(1);
-  });
-
-  // Create helper text to display information on the state of gameplay
-  let title = document
-    .querySelector("#score-container")
-    .appendChild(document.createElement("h2"));
-  title.innerText = "Score";
-  playerScoreDisplay = document
-    .querySelector("#score-container")
-    .appendChild(document.createElement("h3"));
-  comScoreDisplay = document
-    .querySelector("#score-container")
-    .appendChild(document.createElement("h3"));
-  resultAnnouncement = document
-    .querySelector("#result-container")
-    .appendChild(document.createElement("h3"));
-  winnerAnnouncement = document
-    .querySelector("#result-container")
-    .appendChild(document.createElement("h3"));
-
-  playerScoreDisplay.innerText = `Player: 0`;
-  comScoreDisplay.innerText = `Computer: 0`;
-
-  // Attach click handlers to each of the option buttons
-  document
-    .querySelectorAll("#gameplay-selection > button")
-    .forEach((button) => {
-      button.addEventListener("click", handleOptionClick);
-    });
-};
-
-// Load the respective page depending on current state
-const loadPages = () => {
-  gameMode ? loadGameMode(gameMode) : loadModeSelection();
-};
-
-loadPages();
+loadModeSelection();
