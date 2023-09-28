@@ -1,6 +1,6 @@
 import { handleModeClick, handleOptionClick } from "./eventHandlers.js";
+import { resetScore } from "./gamePlay.js";
 
-let gameMode;
 let options = {
   rock: "scissors",
   paper: "rock",
@@ -32,6 +32,10 @@ const loadModeSelection = () => {
 };
 
 const loadNewGame = () => {
+  // Remove Mode Selection options
+  let modeSelection = document.getElementById("mode-selection");
+  modeSelection.querySelectorAll("*").forEach((n) => n.remove());
+
   // Create buttons for each of the options
   optionsArr.forEach((option) => {
     let button = document
@@ -39,6 +43,13 @@ const loadNewGame = () => {
       .appendChild(document.createElement("button"));
     button.textContent = option.charAt(0).toUpperCase() + option.slice(1);
   });
+
+  // Attach click handlers to each of the option buttons
+  document
+    .querySelectorAll("#gameplay-selection > button")
+    .forEach((button) => {
+      button.addEventListener("click", handleOptionClick);
+    });
 
   // Create helper text to display information on the state of gameplay
   let title = document
@@ -60,13 +71,6 @@ const loadNewGame = () => {
 
   playerScoreDisplay.innerText = `Player: 0`;
   comScoreDisplay.innerText = `Computer: 0`;
-
-  // Attach click handlers to each of the option buttons
-  document
-    .querySelectorAll("#gameplay-selection > button")
-    .forEach((button) => {
-      button.addEventListener("click", handleOptionClick);
-    });
 };
 
 const loadResultAnnouncement = (
@@ -86,18 +90,37 @@ const loadResultAnnouncement = (
 };
 
 const loadWinnerAnnouncement = (result) => {
+  // Removes Rock Paper Scissors Option buttons
+  let buttons = document.querySelectorAll("#gameplay-selection > button");
+  buttons.forEach((n) => n.remove());
+
+  // Evaluate Winner
+  let button = document
+    .querySelector("#result-container")
+    .appendChild(document.createElement("button"));
+  button.textContent = "Play Again";
+  button.addEventListener("click", resetGame);
+
   if (result == "Draw") {
-    winnerAnnouncement.innerText = `Game is over! It's a draw! Refresh the page to play again.`;
+    winnerAnnouncement.innerText = `Game is over! It's a draw!`;
   } else {
     result == "Player"
-      ? (winnerAnnouncement.innerText = `Game is over! Player has won! Refresh the page to play again.`)
-      : (winnerAnnouncement.innerText = `Game is over! Computer has won! Refresh the page to play again.`);
+      ? (winnerAnnouncement.innerText = `Game is over! Player has won!`)
+      : (winnerAnnouncement.innerText = `Game is over! Computer has won!`);
   }
 };
 
 const resetGame = () => {
-  //WIP
-  console.log(`game reset`);
+  // Removes result statements
+  let scoreContainer = document.getElementById("score-container");
+  scoreContainer.querySelectorAll("*").forEach((n) => n.remove());
+
+  // Removes result statements
+  let resultContainer = document.getElementById("result-container");
+  resultContainer.querySelectorAll("*").forEach((n) => n.remove());
+
+  resetScore();
+  loadModeSelection();
 };
 
 export {

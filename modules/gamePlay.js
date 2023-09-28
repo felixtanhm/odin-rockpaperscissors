@@ -16,12 +16,33 @@ const playReverseMode = (playerChoice) => {
   let result;
   let comChoice = computerPlay(options);
   if (playerChoice == comChoice) {
-    result = evaluateGamePlay("Draw");
+    comScore++;
+    loadResultAnnouncement(
+      "Computer",
+      playerChoice,
+      comChoice,
+      playerScore,
+      comScore
+    );
   } else {
     if (options[playerChoice] == comChoice) {
-      result = evaluateGamePlay("Com");
+      comScore++;
+      loadResultAnnouncement(
+        "Computer",
+        playerChoice,
+        comChoice,
+        playerScore,
+        comScore
+      );
     } else {
-      result = evaluateGamePlay("Player");
+      playerScore++;
+      loadResultAnnouncement(
+        "Player",
+        playerChoice,
+        comChoice,
+        playerScore,
+        comScore
+      );
     }
   }
   return result;
@@ -50,7 +71,7 @@ const playNormalMode = (playerChoice) => {
     } else {
       comScore++;
       loadResultAnnouncement(
-        "Com",
+        "Computer",
         playerChoice,
         comChoice,
         playerScore,
@@ -70,4 +91,9 @@ const evaluateWinner = () => {
   }
 };
 
-export { playReverseMode, playNormalMode, evaluateWinner };
+const resetScore = () => {
+  playerScore = 0;
+  comScore = 0;
+};
+
+export { playReverseMode, playNormalMode, evaluateWinner, resetScore };

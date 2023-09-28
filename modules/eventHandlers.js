@@ -20,6 +20,7 @@ const handleOptionClick = (e) => {
   }
   if (gameRounds == 0) {
     evaluateWinner();
+    gameRounds = 3;
   }
 };
 
