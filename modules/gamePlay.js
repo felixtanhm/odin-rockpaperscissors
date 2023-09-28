@@ -2,12 +2,10 @@ import {
   loadResultAnnouncement,
   loadWinnerAnnouncement,
   options,
-} from "./utils.js";
+} from "./elementRendering.js";
 
 let playerScore = 0,
   comScore = 0;
-console.log(`Player: ${playerScore}`);
-console.log(`Com: ${comScore}`);
 const computerPlay = () => {
   let int = Math.floor(Math.random() * 3);
   let optionsArr = Object.keys(options);
@@ -32,8 +30,6 @@ const playReverseMode = (playerChoice) => {
 const playNormalMode = (playerChoice) => {
   let comChoice = computerPlay(options);
   if (playerChoice == comChoice) {
-    console.log(`Player: ${playerScore}`);
-    console.log(`Com: ${comScore}`);
     loadResultAnnouncement(
       "Draw",
       playerChoice,
@@ -44,8 +40,6 @@ const playNormalMode = (playerChoice) => {
   } else {
     if (options[playerChoice] == comChoice) {
       playerScore++;
-      console.log(`Player: ${playerScore}`);
-      console.log(`Com: ${comScore}`);
       loadResultAnnouncement(
         "Player",
         playerChoice,
@@ -55,8 +49,6 @@ const playNormalMode = (playerChoice) => {
       );
     } else {
       comScore++;
-      console.log(`Player: ${playerScore}`);
-      console.log(`Com: ${comScore}`);
       loadResultAnnouncement(
         "Com",
         playerChoice,

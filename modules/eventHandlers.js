@@ -1,5 +1,5 @@
 import { playReverseMode, playNormalMode, evaluateWinner } from "./gamePlay.js";
-import { loadNewGame } from "./utils.js";
+import { loadNewGame } from "./elementRendering.js";
 
 let gameRounds = 3;
 let gameMode;
@@ -12,7 +12,6 @@ const handleModeClick = (e) => {
 
 // Gameplay Option click handler
 const handleOptionClick = (e) => {
-  console.log("button clicked");
   if (gameRounds > 0) {
     gameMode == "normal"
       ? playNormalMode(e.target.textContent.toLowerCase())
