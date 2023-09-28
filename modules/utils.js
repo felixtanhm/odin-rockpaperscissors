@@ -3,34 +3,39 @@ const computerPlay = (optionsArr) => {
   return optionsArr[int];
 };
 
-const evaluateWinner = (playerScore, comScore, winnerAnnouncement) => {
-  if (playerScore == comScore) {
+const loadResultAnnouncement = (
+  result,
+  playerChoice,
+  comChoice,
+  playerScore,
+  comScore
+) => {
+  if (result == "Draw") {
+    resultAnnouncement.innerText = "It's a draw!";
+  } else {
+    playerScoreDisplay.innerText = `Player: ${playerScore}`;
+    comScoreDisplay.innerText = `Computer: ${comScore}`;
+    resultAnnouncement.innerText = `You chose ${playerChoice}, while Computer chose ${comChoice}. ${result} has won!`;
+  }
+};
+
+const loadWinnerAnnouncement = (result) => {
+  if (result == "Draw") {
     winnerAnnouncement.innerText = `Game is over! It's a draw! Refresh the page to play again.`;
   } else {
-    playerScore > comScore
+    result == "Player"
       ? (winnerAnnouncement.innerText = `Game is over! Player has won! Refresh the page to play again.`)
       : (winnerAnnouncement.innerText = `Game is over! Computer has won! Refresh the page to play again.`);
   }
 };
 
-export { computerPlay, evaluateWinner };
-
-const playReverseMode = (playerChoice, comChoice) => {
-  if (playerChoice == comChoice) {
-    resultAnnouncement.innerText = "It's a draw!";
-  } else {
-    let winner;
-    if (options[playerChoice] == comChoice) {
-      playerScore++;
-      playerScoreDisplay.innerText = `Player: ${playerScore}`;
-      winner = "Player";
-    } else {
-      comScore++;
-      comScoreDisplay.innerText = `Computer: ${comScore}`;
-      winner = "Computer";
-    }
-    resultAnnouncement.innerText = `${winner} has won!`;
-  }
+const resetGame = () => {
+  console.log(`game reset`);
 };
 
-export { playReverseMode };
+export {
+  computerPlay,
+  loadResultAnnouncement,
+  loadWinnerAnnouncement,
+  resetGame,
+};

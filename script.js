@@ -1,7 +1,12 @@
-import { computerPlay, evaluateWinner } from "./modules/utils.js";
-import { playReverseMode, playNormalMode } from "./modules/gamePlay.js";
+import { computerPlay } from "./modules/utils.js";
+import {
+  playReverseMode,
+  playNormalMode,
+  evaluateWinner,
+} from "./modules/gamePlay.js";
 
 let gameMode;
+let gameRounds = 3;
 let options = {
   rock: "scissors",
   paper: "rock",
@@ -10,9 +15,6 @@ let options = {
 let optionsArr = Object.keys(options);
 
 let playerScoreDisplay, comScoreDisplay, resultAnnouncement, winnerAnnouncement;
-let playerScore,
-  comScore = 0;
-let gameRounds = 3;
 
 // Mode Selection click handler
 const handleModeClick = (e) => {
@@ -22,20 +24,24 @@ const handleModeClick = (e) => {
 
 // Gameplay Option click handler
 const handleOptionClick = (e) => {
+  console.log("button clicked");
   if (gameRounds > 0) {
-    gameRounds--;
     gameMode == "normal"
-      ? playReverseMode(
+      ? playNormalMode(
           e.target.textContent.toLowerCase(),
-          computerPlay(optionsArr)
+          computerPlay(optionsArr),
+          options
         )
-      : playNormalMode(
+      : playReverseMode(
           e.target.textContent.toLowerCase(),
-          computerPlay(optionsArr)
+          computerPlay(optionsArr),
+          options
         );
+    gameRounds--;
   }
-  if (gameRounds == 0)
-    evaluateWinner(playerScore, comScore, winnerAnnouncement);
+  if (gameRounds == 0) {
+    evaluateWinner();
+  }
 };
 
 const loadModeSelection = () => {
@@ -94,9 +100,11 @@ const loadGameMode = (mode) => {
   comScoreDisplay.innerText = `Computer: 0`;
 
   // Attach click handlers to each of the option buttons
-  document.querySelectorAll("#score-container > button").forEach((button) => {
-    button.addEventListener("click", handleOptionClick);
-  });
+  document
+    .querySelectorAll("#gameplay-selection > button")
+    .forEach((button) => {
+      button.addEventListener("click", handleOptionClick);
+    });
 };
 
 // Load the respective page depending on current state
